@@ -1,19 +1,23 @@
+let INTERVAL = 1000;
+
+let iteration = 0;
+let trigoStrength = 3;
+
 function getRangeRandom(yrange) {
-    let valorRetonado = Math.floor(Math.random() * (yrange.max - yrange.min + 1)) + yrange.min;
-    return valorRetonado;
+    return Math.floor(Math.random() * (yrange.max - yrange.min + 1)) + yrange.min;
 }
 
 function getRandom() {
-    var i = iteration;
-    return (Math.sin(i / trigoStrength) * (i / trigoStrength) + i / trigoStrength + 1) * (trigoStrength * 2)
+    const i = iteration++;
+    return (Math.sin(i / trigoStrength) * (i / trigoStrength) + i / trigoStrength + 1) * (trigoStrength * 2);
 }
 
 function generateMinuteWiseTimeSeries(baseval, count, yrange) {
-    var i = 0;
-    var series = [];
+    let i = 0;
+    let series = [];
     while (i < count) {
-        var x = baseval;
-        var y = ((Math.sin(i / trigoStrength) * (i / trigoStrength) + i / trigoStrength + 1) * (trigoStrength * 2))
+        const x = baseval;
+        const y = ((Math.sin(i / trigoStrength) * (i / trigoStrength) + i / trigoStrength + 1) * (trigoStrength * 2));
 
         series.push([x, y]);
         baseval += 9000;

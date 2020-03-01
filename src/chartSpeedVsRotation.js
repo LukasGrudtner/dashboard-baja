@@ -1,4 +1,3 @@
-let INTERVAL = 1000;
 let iterations = 0;
 let data1 = 0;
 let data2 = 0;
@@ -91,18 +90,61 @@ var optionsChartSpeedVsRotation = {
         type: 'datetime',
         range: 300000,
         labels: {
-            /**
-             * Allows users to apply a custom formatter function to xaxis labels.
-             *
-             * @param { String } value - The default value generated
-             * @param { Number } timestamp - In a datetime series, this is the raw timestamp
-             * @param { index } index of the tick / currently executing iteration in xaxis labels array
-             */
             formatter: function (value, timestamp, index) {
                 return moment(new Date(value)).format("HH:mm:ss")
             },
         }
-    }
+    },
+    yaxis: [
+        {
+            opposite: true,
+            axisTicks: {
+                show: true
+            },
+            axisBorder: {
+                show: true,
+                color: "#ff0000"
+            },
+            labels: {
+                style: {
+                    colors: "#ff0000"
+                },
+                formatter: (value) => {
+                    return parseFloat(value.toFixed(2));
+                },
+            },
+            title: {
+                text: "Velocidade",
+                style: {
+                    color: "#ff0000"
+                }
+            }
+        },
+        {
+            opposite: false,
+            axisTicks: {
+                show: true
+            },
+            axisBorder: {
+                show: true,
+                color: "#ffd900"
+            },
+            labels: {
+                style: {
+                    colors: "#ffd900",
+                },
+                formatter: (value) => {
+                    return parseFloat(value.toFixed(2));
+                },
+            },
+            title: {
+                text: "Rotação",
+                style: {
+                    color: "#ffd900",
+                }
+            }
+        }
+    ],
 };
 
 var chartSpeedVsRotation = new ApexCharts(document.querySelector("#chartSpeedVsRotation"), optionsChartSpeedVsRotation);
@@ -130,11 +172,13 @@ window.setInterval(function () {
         ]
     );
 
-    // if (dataArray1.length >= 300) {
-    //     dataArray1.shift();
-    // }
-    //
-    // if (dataArray2.length >= 300) {
-    //     dataArray2.shift();
-    // }
+    if (dataArray1.length >= 300) {
+        dataArray1.shift();
+    }
+
+    if (dataArray2.length >= 300) {
+        dataArray2.shift();
+    }
+
+    console.log(dataArray1);
 }, INTERVAL);

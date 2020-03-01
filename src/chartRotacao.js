@@ -1,6 +1,3 @@
-var trigoStrength = 3
-var iteration = 11
-
 var optionsCircle = {
     series: [0],
     colors: ["#421309"],
@@ -79,10 +76,15 @@ var optionsCircle = {
 var chartRotacao = new ApexCharts(document.querySelector("#chartRotacao"), optionsCircle);
 chartRotacao.render();
 
+var labelRotacao = document.querySelector("#label-rotacao");
+
 window.setInterval(function () {
 
-    iteration++;
+    let value = getRangeRandom({min: 0, max: 4000});
+    chartRotacao.updateSeries([value / 40]);
 
-    chartRotacao.updateSeries([getRangeRandom({min: 0, max: 70})])
 
-}, 100000000)
+    labelRotacao.textContent = value;
+
+
+}, INTERVAL)

@@ -54,6 +54,9 @@ var optionsChartAccelerometer = {
             },
             offsetY: -7,
             offsetX: 0,
+            formatter: (value) => {
+                return parseFloat(value.toFixed(2));
+            },
         },
         axisBorder: {
             show: false,
@@ -115,14 +118,17 @@ window.setInterval(function () {
         ]
     );
 
-    if (dataArray1.length >= 60) {
-        dataArray1.shift();
+    if (dataArrayX.length >= 60) {
+        dataArrayX.shift();
     }
 
-    if (dataArray2.length >= 60) {
-        dataArray2.shift();
+    if (dataArrayY.length >= 60) {
+        dataArrayY.shift();
     }
 
-    console.log(dataArray1);
+    if (dataArrayZ.length >= 60) {
+        dataArrayZ.shift();
+    }
+
 
 }, INTERVAL);

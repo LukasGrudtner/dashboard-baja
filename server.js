@@ -9,4 +9,4 @@ app.use( express.static( __dirname + '/src' ));
 //     res.sendFile(path.join(__dirname + '/src'));
 // });
 
-app.listen(8080);
+app.listen(8096);

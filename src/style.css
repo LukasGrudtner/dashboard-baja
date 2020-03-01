@@ -57,10 +57,8 @@ h1, h2, h3, h4, h5, h6, strong {
 
 #chartRotacao {
   position: absolute;
-  top: -14px;
-  left: 16%;
-
-
+  top: -26px;
+  left: -48%;
 }
 
 #chartRotacao g {
@@ -85,13 +83,13 @@ h1, h2, h3, h4, h5, h6, strong {
 .gear-wrap {
   position: absolute;
   top: 73%;
-  left: 26%;
+  left: -19%;
 }
 
 .indicators-wrap {
   position: absolute;
   top: 55%;
-  left: 67%;
+  left: 95%;
 }
 
 .gear-icon {
@@ -120,24 +118,16 @@ h1, h2, h3, h4, h5, h6, strong {
 }
 
 #central-panel {
-  position: relative;
+  position: absolute;
   top: 13%;
-  left: 22%;
+  left: 56%;
 }
 
 .enabled {
-  color: #FF0000;
+  color: #870000;
 }
 
 .disabled {
-  color: #1B213B;
-}
-
-.tanque-reserva {
-  color: #FF0000;
-}
-
-.tanque-cheio {
   color: #1B213B;
 }
 
@@ -151,7 +141,24 @@ h1, h2, h3, h4, h5, h6, strong {
   color: white;
   position: absolute;
   top: 64%;
-  left: 45.5%;
+  left: 36.5%;
+}
+
+#label-rotacao {
+  font-size: 150%;
+  color: white;
+  font-family: 'Arial';
+  position: absolute;
+  top: 14%;
+  left: -16%;
+}
+
+#label-rpm {
+  font-size: 125%;
+  color: white;
+  position: absolute;
+  top: 23%;
+  left: -14%;
 }
 
 .logo-wrap {
