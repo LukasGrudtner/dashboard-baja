@@ -1,0 +1,166 @@
+body {
+  background: #1B213B;
+  color: #777;
+  font-family: Montserrat, Arial, sans-serif;
+}
+
+.body-bg {
+  background: #F3F4FA !important;
+}
+
+h1, h2, h3, h4, h5, h6, strong {
+  font-weight: 600;
+}
+
+.box .apexcharts-xaxistooltip {
+  background: #1B213B;
+  color: #fff;
+}
+
+.content-area {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.box {
+  background-color: #262D47;
+  padding: 25px 25px;
+  border-radius: 4px; 
+}
+
+.columnbox {
+  padding-right: 15px;
+}
+.radialbox {
+  max-height: 333px;
+  margin-bottom: 60px;
+}
+
+.apexcharts-legend-series tspan:nth-child(3) {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.edit-on-codepen {
+  text-align: right;
+  width: 100%;
+  padding: 0 20px 40px;
+  position: relative;
+  top: -30px;
+  cursor: pointer;
+}
+
+#chartVelocidade {
+    /*position: relative;*/
+    top: -340px;
+}
+
+#chartRotacao {
+  position: absolute;
+  top: -14px;
+  left: 16%;
+
+
+}
+
+#chartRotacao g {
+  transform: translate(0, 0);
+}
+
+.gear-number {
+  position: absolute;
+  left: -60%;
+  top: 10%;
+  font-size: 200%;
+  font-family: 'Arial';
+  color: white;
+}
+
+.gear-shift-icon {
+  width: 50px;
+  height: 50px;
+  color: white;
+}
+
+.gear-wrap {
+  position: absolute;
+  top: 73%;
+  left: 26%;
+}
+
+.indicators-wrap {
+  position: absolute;
+  top: 55%;
+  left: 67%;
+}
+
+.gear-icon {
+  font-size: 350%;
+}
+
+.stabilizer-bar-wrap {
+
+}
+
+.stabilizer-bar-icon {
+  font-size: 250%;
+}
+
+.tank-wrap {
+  /*position: relative;*/
+  /*top: 71%;*/
+  /*left: -16%;*/
+}
+
+#display-tanque {
+  position: absolute;
+  top: 85%;
+  left: 19%;
+  font-size: 250%;
+}
+
+#central-panel {
+  position: relative;
+  top: 13%;
+  left: 22%;
+}
+
+.enabled {
+  color: #FF0000;
+}
+
+.disabled {
+  color: #1B213B;
+}
+
+.tanque-reserva {
+  color: #FF0000;
+}
+
+.tanque-cheio {
+  color: #1B213B;
+}
+
+.row {
+  height: 500px;
+  max-height: 800px !important;
+}
+
+#display-km {
+  font-size: 32px;
+  color: white;
+  position: absolute;
+  top: 64%;
+  left: 45.5%;
+}
+
+.logo-wrap {
+  position: absolute;
+  top: 26%;
+  right: 68%;
+}
+
+.logo-baja {
+  height: 200px;
+  width: 200px;
+}
