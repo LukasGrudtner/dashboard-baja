@@ -80,11 +80,10 @@ var labelRotacao = document.querySelector("#label-rotacao");
 
 window.setInterval(function () {
 
-    let value = getRangeRandom({min: 0, max: 4000});
+    let length = dataArray['rotation'].length;
+    let value = dataArray['rotation'][length - 1];
+
     chartRotacao.updateSeries([value / 40]);
-
-
     labelRotacao.textContent = value;
 
-
-}, INTERVAL)
+}, INTERVAL);

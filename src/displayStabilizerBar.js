@@ -13,5 +13,9 @@ function setStabilizerBar(hasStabilizerBar) {
 }
 
 window.setInterval(function () {
-    setStabilizerBar(getRangeRandom({ min: 0, max: 100 }) % 2);
+
+    let length = dataArray['stabilizerBar'].length;
+    let value = dataArray['stabilizerBar'][length - 1];
+
+    setStabilizerBar(value);
 }, 1000);

@@ -13,5 +13,9 @@ function setReserveTank(isTankOnReserve) {
 }
 
 window.setInterval(function () {
-    setReserveTank(getRangeRandom({ min: 0, max: 100 }) % 2);
+
+    let length = dataArray['fuelTank'].length;
+    let value = dataArray['fuelTank'][length - 1];
+
+    setReserveTank(value);
 }, 1000);

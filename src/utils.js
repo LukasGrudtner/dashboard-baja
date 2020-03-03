@@ -3,6 +3,16 @@ let INTERVAL = 1000;
 let iteration = 0;
 let trigoStrength = 3;
 
+let dataArray = [];
+dataArray['speed'] = [];
+dataArray['rotation'] = [];
+dataArray['gear'] = [];
+dataArray['temperatureEnviroment'] = [];
+dataArray['temperatureObject'] = [];
+dataArray['stabilizerBar'] = [];
+dataArray['fuelTank'] = [];
+dataArray['accelerometer'] = [];
+
 function getRangeRandom(yrange) {
     return Math.floor(Math.random() * (yrange.max - yrange.min + 1)) + yrange.min;
 }

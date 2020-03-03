@@ -9,9 +9,9 @@ window.Apex = {
             show: false
         },
     },
-    colors: ['#ff0000', '#ffd900', '#ffffff'],
+    colors: ['#de9c1e', '#06c888', '#0680de'],
     stroke: {
-        width: 3
+        width: 2
     },
     dataLabels: {
         enabled: false
@@ -30,7 +30,7 @@ window.Apex = {
     fill: {
         type: 'gradient',
         gradient: {
-            gradientToColors: ['#870000', '#806d00', '#808080']
+            gradientToColors: ['#835c12', '#047b54', '#014981']
         },
     },
     tooltip: {
@@ -50,19 +50,27 @@ window.Apex = {
     }
 };
 
-var dataArray1 = [];
-var dataArray2 = [];
+var dataArraySpeed = [];
+var dataArrayRotation = [];
 var base = moment.now();
 
 var optionsChartSpeedVsRotation = {
     series: [{
         name: 'Velocidade',
-        data: dataArray1,
+        data: dataArraySpeed,
     }, {
         name: 'Rotação',
-        data: dataArray2
+        data: dataArrayRotation
     }],
     chart: {
+        id: 'realtime',
+        animations: {
+            enabled: true,
+            easing: 'linear',
+            dynamicAnimation: {
+                speed: 1000
+            }
+        },
         height: 350,
         type: 'line',
         zoom: {
@@ -73,8 +81,8 @@ var optionsChartSpeedVsRotation = {
         enabled: false
     },
     stroke: {
-        curve: 'straight',
-        width: 5,
+        curve: 'smooth',
+        width: 2,
     },
     title: {
         text: 'Velocidade vs. Rotação',
@@ -88,7 +96,7 @@ var optionsChartSpeedVsRotation = {
     // },
     xaxis: {
         type: 'datetime',
-        range: 300000,
+        range: 40000,
         labels: {
             formatter: function (value, timestamp, index) {
                 return moment(new Date(value)).format("HH:mm:ss")
@@ -103,11 +111,11 @@ var optionsChartSpeedVsRotation = {
             },
             axisBorder: {
                 show: true,
-                color: "#ff0000"
+                color: "#de9c1e"
             },
             labels: {
                 style: {
-                    colors: "#ff0000"
+                    colors: "#de9c1e"
                 },
                 formatter: (value) => {
                     return parseFloat(value.toFixed(2));
@@ -116,7 +124,7 @@ var optionsChartSpeedVsRotation = {
             title: {
                 text: "Velocidade",
                 style: {
-                    color: "#ff0000"
+                    color: "#de9c1e"
                 }
             }
         },
@@ -127,11 +135,11 @@ var optionsChartSpeedVsRotation = {
             },
             axisBorder: {
                 show: true,
-                color: "#ffd900"
+                color: "#06c888"
             },
             labels: {
                 style: {
-                    colors: "#ffd900",
+                    colors: "#06c888",
                 },
                 formatter: (value) => {
                     return parseFloat(value.toFixed(2));
@@ -140,7 +148,7 @@ var optionsChartSpeedVsRotation = {
             title: {
                 text: "Rotação",
                 style: {
-                    color: "#ffd900",
+                    color: "#06c888",
                 }
             }
         }
@@ -150,35 +158,35 @@ var optionsChartSpeedVsRotation = {
 var chartSpeedVsRotation = new ApexCharts(document.querySelector("#chartSpeedVsRotation"), optionsChartSpeedVsRotation);
 chartSpeedVsRotation.render();
 
+let counterSpeedVsRotation = 0;
 window.setInterval(function () {
 
-    var data1 = getRandom();
-    var data2 = getRandom()*(-1.2);
+    let length = dataArray['speed'].length;
 
-
-    dataArray1.push([base, data1]);
-    dataArray2.push([base, data2]);
+    dataArraySpeed.push([base, dataArray['speed'][length - 1]]);
+    dataArrayRotation.push([base, dataArray['rotation'][length - 1]]);
 
     base += INTERVAL;
 
     chartSpeedVsRotation.updateSeries(
         [
             {
-                data: dataArray1
+                data: dataArraySpeed
             },
             {
-                data: dataArray2
+                data: dataArrayRotation
             }
         ]
     );
 
-    if (dataArray1.length >= 300) {
-        dataArray1.shift();
+    if (counterSpeedVsRotation++ === 120) {
+        counter = 0;
+        resetDataAccelerometer();
     }
 
-    if (dataArray2.length >= 300) {
-        dataArray2.shift();
-    }
-
-    console.log(dataArray1);
 }, INTERVAL);
+
+function resetDataAccelerometer() {
+    dataArraySpeed = dataArraySpeed.slice(dataArraySpeed.length - 60, dataArraySpeed.length);
+    dataArrayRotation = dataArrayRotation.slice(dataArrayRotation.length - 60, dataArrayRotation.length);
+}

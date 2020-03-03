@@ -3,25 +3,35 @@ let dataArrayY = [];
 let dataArrayZ = [];
 
 var optionsChartAccelerometer = {
+
     series: [{
         name: 'x',
-        data: dataArrayX
+        data: dataArrayX.slice()
     }, {
         name: 'y',
-        data: dataArrayY
+        data: dataArrayY.slice()
     }, {
         name: 'z',
-        data: dataArrayZ
+        data: dataArrayZ.slice()
     }],
     chart: {
+        // id: 'realtime',
         type: 'area',
-        height: 350
+        height: 350,
+        // animations: {
+        //     enabled: true,
+        //     easing: 'linear',
+        //     dynamicAnimation: {
+        //         speed: 1000
+        //     }
+        // },
     },
     dataLabels: {
         enabled: false
     },
     stroke: {
-        curve: 'straight'
+        curve: 'smooth',
+        width: 2,
     },
 
     title: {
@@ -42,7 +52,7 @@ var optionsChartAccelerometer = {
         labels: {
             show: false
         },
-        range: 60000,
+        range: 30000,
     },
     yaxis: {
         tickAmount: 4,
@@ -66,7 +76,11 @@ var optionsChartAccelerometer = {
         }
     },
     fill: {
-        opacity: 0.5
+        gradient: {
+            enabled: true,
+            opacityFrom: 0.75,
+            opacityTo: 0.25
+        }
     },
     tooltip: {
         x: {
@@ -92,25 +106,25 @@ var optionsChartAccelerometer = {
 var chartAccelerometer = new ApexCharts(document.querySelector("#chartAccelerometer"), optionsChartAccelerometer);
 chartAccelerometer.render();
 
+var counter = 0;
 window.setInterval(function () {
 
-    var dataX = getRandom();
-    var dataY = getRandom()*(-1.2);
-    var dataZ = getRandom()*(-1.5);
+    let length = dataArray['accelerometer'].length;
+    let data = dataArray['accelerometer'][length - 1];
 
-    dataArrayX.push([base, dataX]);
-    dataArrayY.push([base, dataY]);
-    dataArrayZ.push([base, dataZ]);
+    dataArrayX.push([base, data.x]);
+    dataArrayY.push([base, data.y]);
+    dataArrayZ.push([base, data.z]);
 
     base += INTERVAL;
 
     chartAccelerometer.updateSeries(
         [
             {
-                data: dataArrayX
+                data: dataArrayX,
             },
             {
-                data: dataArrayY
+                data: dataArrayY,
             },
             {
                 data: dataArrayZ
@@ -118,17 +132,15 @@ window.setInterval(function () {
         ]
     );
 
-    if (dataArrayX.length >= 60) {
-        dataArrayX.shift();
+    if (counter++ === 120) {
+        counter = 0;
+        resetDataAccelerometer();
     }
-
-    if (dataArrayY.length >= 60) {
-        dataArrayY.shift();
-    }
-
-    if (dataArrayZ.length >= 60) {
-        dataArrayZ.shift();
-    }
-
 
 }, INTERVAL);
+
+function resetDataAccelerometer() {
+    dataArrayX = dataArrayX.slice(dataArrayX.length - 60, dataArrayX.length);
+    dataArrayY = dataArrayY.slice(dataArrayY.length - 60, dataArrayY.length);
+    dataArrayZ = dataArrayZ.slice(dataArrayZ.length - 60, dataArrayZ.length);
+}

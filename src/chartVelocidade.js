@@ -81,6 +81,7 @@ chartVelocidade.render();
 
 window.setInterval(function () {
 
-    chartVelocidade.updateSeries([getRangeRandom({min: 0, max: 100})])
+    let length = dataArray['speed'].length;
+    chartVelocidade.updateSeries([dataArray['speed'][length - 1]]);
 
-}, INTERVAL)
+}, INTERVAL);
