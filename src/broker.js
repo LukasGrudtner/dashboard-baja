@@ -1,7 +1,8 @@
 var mosca = require('mosca');
 var settings = {
+    port: 1883,
     http: {
-        port: MQTT_PORT,
+        port: 3000,
         bundle: true,
         static: './',
     }
@@ -13,10 +14,10 @@ server.on('ready', function () {
     console.log("ready");
 });
 
-// server.on('published', function (packet, client) {
-//     console.log("Published: ", packet);
+server.on('published', function (packet, client) {
+    console.log("Published: ", packet);
 //     console.log("Client: ", client);
-// });
+});
 
 // server.on('clientConnected', function (client) {
 // console.log("Client: ", client.id);

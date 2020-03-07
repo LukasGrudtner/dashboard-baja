@@ -2,12 +2,19 @@ let dataArrayAmbiente = [];
 let dataArrayObjeto = [];
 
 var optionsChartTemperature = {
+    title: {
+        text: 'Temperatura CVT',
+        align: 'left',
+        style: {
+            fontSize: '14px'
+        }
+    },
     series: [{
         name: 'Ambiente',
         type: 'area',
         data: dataArrayAmbiente.slice(),
     }, {
-        name: 'Objeto',
+        name: 'CVT',
         type: 'line',
         data: dataArrayObjeto.slice(),
     }],
