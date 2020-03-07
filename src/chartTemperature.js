@@ -5,15 +5,23 @@ var optionsChartTemperature = {
     series: [{
         name: 'Ambiente',
         type: 'area',
-        data: dataArrayAmbiente,
+        data: dataArrayAmbiente.slice(),
     }, {
         name: 'Objeto',
         type: 'line',
-        data: dataArrayObjeto,
+        data: dataArrayObjeto.slice(),
     }],
     chart: {
         height: 350,
         type: 'line',
+        id: 'realtime',
+        animations: {
+            enabled: true,
+            easing: 'linear',
+            dynamicAnimation: {
+                speed: 1000
+            }
+        },
     },
     stroke: {
         curve: 'smooth'
@@ -32,6 +40,19 @@ var optionsChartTemperature = {
             },
         }
     ],
+    xaxis: {
+        type: 'datetime',
+        axisBorder: {
+            show: false
+        },
+        axisTicks: {
+            show: false
+        },
+        labels: {
+            show: false
+        },
+        range: 30000,
+    },
     // tooltip: {
     //     shared: true,
     //     intersect: false,
@@ -46,32 +67,45 @@ var optionsChartTemperature = {
 var chartTemperature = new ApexCharts(document.querySelector("#chartTemperature"), optionsChartTemperature);
 chartTemperature.render();
 
+var counterTemperature = 0;
 window.setInterval(function () {
 
-    var dataAmbiente = getRandom();
-    var dataObjeto = getRandom();
+    let lengthEnvironment = dataArray['temperatureEnvironment'].length;
+    let lengthObject = dataArray['temperatureObject'].length;
 
-    dataArrayAmbiente.push([base, dataAmbiente]);
-    dataArrayObjeto.push([base, dataObjeto]);
+    dataArrayAmbiente.push([base, dataArray['temperatureEnvironment'][lengthEnvironment - 1]]);
+    dataArrayObjeto.push([base, dataArray['temperatureObject'][lengthObject - 1]]);
 
+    updateData();
     base += INTERVAL;
 
     chartTemperature.updateSeries(
         [
             {
-                data: dataAmbiente
+                data: dataArrayAmbiente
             },
             {
-                data: dataObjeto
+                data: dataArrayObjeto
             }
         ]
     );
 
-    if (dataArrayAmbiente.length >= 300) {
-        dataArrayAmbiente.shift();
+    if (counterTemperature++ >= 120) {
+        counterTemperature = 0;
+        resetDataTemperature();
     }
 
-    if (dataArrayObjeto.length >= 300) {
-        dataArrayObjeto.shift();
-    }
 }, INTERVAL);
+
+function resetDataTemperature() {
+    dataArrayAmbiente = dataArrayAmbiente.slice(dataArrayAmbiente.length - 60, dataArrayAmbiente.length);
+    dataArrayObjeto = dataArrayObjeto.slice(dataArrayObjeto.length - 60, dataArrayObjeto.length);
+}
+
+function updateData() {
+    for (var i = 0; i < dataArrayX.length - 60; i++) {
+        dataArrayX[i] = [dataArrayX[i][0], 0];
+        dataArrayY[i] = [dataArrayY[i][0], 0];
+        dataArrayZ[i] = [dataArrayZ[i][0], 0];
+    }
+}

@@ -106,11 +106,21 @@ var optionsChartAccelerometer = {
 var chartAccelerometer = new ApexCharts(document.querySelector("#chartAccelerometer"), optionsChartAccelerometer);
 chartAccelerometer.render();
 
-var counter = 0;
+var counter = -60;
 window.setInterval(function () {
 
     let length = dataArray['accelerometer'].length;
     let data = dataArray['accelerometer'][length - 1];
+
+    if (data == null) {
+        data = {
+            x: 0,
+            y: 0,
+            z: 0
+        };
+    }
+
+    updateData();
 
     dataArrayX.push([base, data.x]);
     dataArrayY.push([base, data.y]);
@@ -132,7 +142,7 @@ window.setInterval(function () {
         ]
     );
 
-    if (counter++ === 120) {
+    if (counter++ === 60) {
         counter = 0;
         resetDataAccelerometer();
     }
@@ -143,4 +153,12 @@ function resetDataAccelerometer() {
     dataArrayX = dataArrayX.slice(dataArrayX.length - 60, dataArrayX.length);
     dataArrayY = dataArrayY.slice(dataArrayY.length - 60, dataArrayY.length);
     dataArrayZ = dataArrayZ.slice(dataArrayZ.length - 60, dataArrayZ.length);
+}
+
+function updateData() {
+    for (var i = 0; i < dataArrayX.length - 60; i++) {
+        dataArrayX[i] = [dataArrayX[i][0], 0];
+        dataArrayY[i] = [dataArrayY[i][0], 0];
+        dataArrayZ[i] = [dataArrayZ[i][0], 0];
+    }
 }

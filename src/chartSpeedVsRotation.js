@@ -163,10 +163,13 @@ window.setInterval(function () {
 
     let length = dataArray['speed'].length;
 
-    dataArraySpeed.push([base, dataArray['speed'][length - 1]]);
-    dataArrayRotation.push([base, dataArray['rotation'][length - 1]]);
+    // dataArraySpeed.push([base, dataArray['speed'][length - 1]]);
+    // dataArrayRotation.push([base, dataArray['rotation'][length - 1]]);
 
-    base += INTERVAL;
+    // base += INTERVAL;
+
+    getNewSpeed(base);
+    getNewRotation(base);
 
     chartSpeedVsRotation.updateSeries(
         [
@@ -179,8 +182,8 @@ window.setInterval(function () {
         ]
     );
 
-    if (counterSpeedVsRotation++ === 120) {
-        counter = 0;
+    if (counterSpeedVsRotation++ >= 120) {
+        counterSpeedVsRotation = 0;
         resetDataAccelerometer();
     }
 
@@ -189,4 +192,23 @@ window.setInterval(function () {
 function resetDataAccelerometer() {
     dataArraySpeed = dataArraySpeed.slice(dataArraySpeed.length - 60, dataArraySpeed.length);
     dataArrayRotation = dataArrayRotation.slice(dataArrayRotation.length - 60, dataArrayRotation.length);
+}
+
+
+function getNewSpeed(baseval) {
+    for (var i = 0; i < dataArraySpeed.length - 60; i++) {
+        dataArraySpeed[i] = [dataArraySpeed[i][0], 0];
+    }
+
+    let length = dataArray['speed'].length;
+    dataArraySpeed.push([base, dataArray['speed'][length - 1]]);
+}
+
+function getNewRotation(baseval) {
+    for (var i = 0; i < dataArrayRotation.length - 60; i++) {
+        dataArrayRotation[i] = [dataArrayRotation[i][0], 0];
+    }
+
+    let length = dataArray['rotation'].length;
+    dataArrayRotation.push([base, dataArray['rotation'][length - 1]]);
 }

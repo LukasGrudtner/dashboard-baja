@@ -51,16 +51,16 @@
 // }
 
 // var mqtt = require('mqtt');
-var cliente = mqtt.connect('ws://192.168.25.4:3000/mqtt');
+var cliente = mqtt.connect(SUBSCRIBER_ADDRESS);
 // var cliente = mqtt.connect("mqtt://localhost");
 // var cliente = mqtt.connect();
-cliente.subscribe('mqtt/data');
+// cliente.subscribe(TOPIC);
 
 cliente.on('connect', () => {
-    cliente.subscribe('mqtt/data');
+    cliente.subscribe(TOPIC);
 });
 
-let countMessages = 0;
+let countMessages = -5;
 
 cliente.on('message', (topic, message) => {
     let data = JSON.parse(message.toString());
@@ -69,18 +69,31 @@ cliente.on('message', (topic, message) => {
     dataArray['speed'].push(data.speed);
     dataArray['rotation'].push(data.rotation);
     dataArray['gear'].push(data.gear);
-    dataArray['temperatureEnviroment'].push(data.temperatureEnviroment);
+    dataArray['temperatureEnvironment'].push(data.temperatureEnvironment);
     dataArray['temperatureObject'].push(data.temperatureObject);
     dataArray['stabilizerBar'].push(data.stabilizerBar);
     dataArray['fuelTank'].push(data.fuelTank);
     dataArray['accelerometer'].push(data.accelerometer);
 
-    if (dataArray.length > 20) {
-        dataArray.slice(0, 1);
-    }
+    // if (dataArray.length > 20) {
+    //     dataArray.slice(0, 1);
+    // }
 
-    if (countMessages >= 25) {
-        dataArray.slice(0, 20);
+    if (countMessages++ >= 20) {
+        // dataArray.slice(0, 20);
         countMessages = 0;
+
+        // dataArray.forEach((element) => {
+        //     element.slice(20);
+        // });
+
+        dataArray['speed'].splice(0, 20);
+        dataArray['rotation'].splice(0, 20);
+        dataArray['gear'].splice(0, 20);
+        dataArray['temperatureEnvironment'].splice(0, 20);
+        dataArray['temperatureObject'].splice(0, 20);
+        dataArray['stabilizerBar'].splice(0, 20);
+        dataArray['fuelTank'].splice(0, 20);
+        dataArray['accelerometer'].splice(0, 20);
     }
 });

@@ -82,6 +82,8 @@ chartVelocidade.render();
 window.setInterval(function () {
 
     let length = dataArray['speed'].length;
-    chartVelocidade.updateSeries([dataArray['speed'][length - 1]]);
+    let value = dataArray['speed'][length - 1];
+
+    chartVelocidade.updateSeries([value]);
 
 }, INTERVAL);
