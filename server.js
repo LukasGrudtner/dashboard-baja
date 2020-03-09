@@ -10,8 +10,4 @@ app.use( express.static( __dirname + '/src' ));
 //     res.sendFile(path.join(__dirname + '/src'));
 // });
 
-try {
     app.listen(8000);
-} catch (e) {
-    app.listen(8800);
-}
