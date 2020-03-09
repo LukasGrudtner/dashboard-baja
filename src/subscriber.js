@@ -15,14 +15,14 @@ cliente.on('message', (topic, message) => {
 
     let data = JSON.parse(message.toString());
 
-    dataArray['speed'].push(data.speed);
-    dataArray['rotation'].push(data.rotation);
-    dataArray['gear'].push(data.gear);
-    dataArray['temperatureEnvironment'].push(data.temperatureEnvironment);
-    dataArray['temperatureObject'].push(data.temperatureObject);
-    dataArray['stabilizerBar'].push(data.stabilizerBar);
-    dataArray['fuelTank'].push(data.fuelTank);
-    dataArray['accelerometer'].push(data.accelerometer);
+    dataArray['speed'].push(data.s);
+    dataArray['rotation'].push(data.r);
+    dataArray['gear'].push(data.g);
+    dataArray['temperatureEnvironment'].push(data.te);
+    dataArray['temperatureObject'].push(data.to);
+    dataArray['stabilizerBar'].push(data.sb);
+    dataArray['fuelTank'].push(data.f);
+    dataArray['accelerometer'].push(data.a);
 
 
     if (countMessages++ >= 20) {

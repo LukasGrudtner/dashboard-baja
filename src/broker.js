@@ -15,7 +15,7 @@ server.on('ready', function () {
 });
 
 server.on('published', function (packet, client) {
-    console.log("Published: ", packet);
+    // console.log("Published: ", packet);
 //     console.log("Client: ", client);
 });
 
