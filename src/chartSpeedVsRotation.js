@@ -201,7 +201,11 @@ function getNewSpeed(baseval) {
     }
 
     let length = dataArray['speed'].length;
-    dataArraySpeed.push([base, dataArray['speed'][length - 1]]);
+    var dataSpeed = dataArray['speed'][length - 1];
+    if (dataSpeed == null) {
+        dataSpeed = 0;
+    }
+    dataArraySpeed.push([base, dataSpeed]);
 }
 
 function getNewRotation(baseval) {
@@ -210,5 +214,9 @@ function getNewRotation(baseval) {
     }
 
     let length = dataArray['rotation'].length;
-    dataArrayRotation.push([base, dataArray['rotation'][length - 1]]);
+    var dataRotation = dataArray['rotation'][length - 1];
+    if (dataRotation == null) {
+        dataRotation = 0;
+    }
+    dataArrayRotation.push([base, dataRotation]);
 }

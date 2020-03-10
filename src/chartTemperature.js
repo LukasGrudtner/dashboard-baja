@@ -80,8 +80,18 @@ window.setInterval(function () {
     let lengthEnvironment = dataArray['temperatureEnvironment'].length;
     let lengthObject = dataArray['temperatureObject'].length;
 
-    dataArrayAmbiente.push([base, dataArray['temperatureEnvironment'][lengthEnvironment - 1]]);
-    dataArrayObjeto.push([base, dataArray['temperatureObject'][lengthObject - 1]]);
+    var dataAmbiente = dataArray['temperatureEnvironment'][lengthEnvironment - 1];
+    if (dataAmbiente == null) {
+        dataAmbiente = 0;
+    }
+
+    var dataObjeto = dataArray['temperatureObject'][lengthObject - 1];
+    if (dataObjeto == null) {
+        dataObjeto = 0;
+    }
+
+    dataArrayAmbiente.push([base, dataAmbiente]);
+    dataArrayObjeto.push([base, dataObjeto]);
 
     updateData();
     base += INTERVAL;
